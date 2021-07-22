@@ -7,42 +7,41 @@ If the result of your code is 'false' then return:
 {success:false, erroeMessage:{the reason why it is false}}
 The error Message is importent! it will be written in the audit log and help the user to understand what happen
 */
-
+import { PapiClient} from '@pepperi-addons/papi-sdk'
 import { Client, Request } from '@pepperi-addons/debug-server'
-import { PapiClient } from '@pepperi-addons/papi-sdk'
-import { stringify } from 'querystring';
-
-
 
 export async function install(client: Client, request: Request): Promise<any> {
     const papiClient = new PapiClient({
-        baseURL: client.BaseURL,
+        addonSecretKey: client.AddonSecretKey,
+        baseURL: client.BaseURL, 
         token: client.OAuthAccessToken,
         addonUUID: client.AddonUUID,
-        actionUUID: client['ActionUUID']
-    });
-
-    await papiClient.addons.data.schemes.post({
+        actionUUID: client["ActionUUID"]
+    }); 
+    papiClient.addons.data.schemes.post({
         Name: 'Todos',
         Type: 'indexed_data',
         Fields: {
             Name: {
                 Type: 'String',
                 Indexed: true
+                
             },
             Description: {
                 Type: 'String',
                 Indexed: true
+                
             },
             DueDate: {
                 Type: 'DataTime'
+                
             },
             Completed: {
                 Type: 'Bool'
-            } 
-        } as any  
-    })
-    
+                
+            }
+        } as any });
+
     return {success:true,resultObject:{}}
 }
 
