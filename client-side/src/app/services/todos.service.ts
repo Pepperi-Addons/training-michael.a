@@ -15,21 +15,41 @@ export class TodosService {
   async toDoSave(obj){
     return this.addonService.papiClient.addons.api.uuid(this.addonService.addonUUID).file('api').func('todos').post(undefined,obj);
    }
-   async deleteTodo(objs){ 
-    objs.forEach(obj => {
-       this.addonService.papiClient.addons.api.uuid(this.addonService.addonUUID).file('api').func('todos').post(undefined,obj).then(); 
-     });
-    
+
+   //add here delete function 
+
+   async delete(keys){
      
+    
+    return await this.addonService.pepPost('delete_todos',{'arr':keys});
    }
 
-   async markTodo(objs){ 
-    objs.forEach(obj => {
-       this.addonService.papiClient.addons.api.uuid(this.addonService.addonUUID).file('api').func('todos').post(undefined,obj).then(); 
-     });
+   async markAsDone(keys){
+     return await this.addonService.pepPost('mark_as_done', {'arr': keys});
+   }
+  //  async deleteTodo(objs){ 
+
+  //   //here you need to call to delete that recived array of uuids. use await
+    
+  //   debugger
+  //   let uidArr = objs.map((obj) => {
+  //     return obj.UID;
+  //   });
+  //   return  await this.addonService.papiClient.addons.api.uuid(this.addonService.addonUUID).file('api').func('todos').delete(undefined,uidArr);
+    // objs.forEach(obj => {
+    //    this.addonService.papiClient.addons.api.uuid(this.addonService.addonUUID).file('api').func('todos').post(undefined,obj).then(); 
+    //  });
     
      
-   }
+  //  }
+
+  //  async markTodo(objs){ 
+  //   objs.forEach(obj => {
+  //      this.addonService.papiClient.addons.api.uuid(this.addonService.addonUUID).file('api').func('todos').post(undefined,obj).then(); 
+  //    });
+    
+     
+  //  }
 
 
 

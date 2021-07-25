@@ -1,4 +1,4 @@
-import { PapiClient, InstalledAddon } from '@pepperi-addons/papi-sdk'
+import { PapiClient, InstalledAddon } from '@pepperi-addons/papi-sdk';
 import { Client } from '@pepperi-addons/debug-server';
 import {v4 as uuid} from 'uuid';
 import { request } from 'http';
@@ -21,9 +21,27 @@ export class MyService {
       });
     }
 
+
     getTodos(options){
         return this.papiClient.addons.data.uuid(this.addonUUID).table('Todos').find(options);
     }
+    
+    async deleteTodo(arr: string[]){
+        
+        return await Promise.all(
+            arr.map(async (key) => {
+                return  await this.papiClient.addons.data.uuid(this.addonUUID).table('Todos').upsert({'Key': key, 'Hidden': true});
+            }));
+        }
+
+    async markTodo(arr: string[]) {
+        return await arr.map(async (key) => {
+            return await this.papiClient.addons.data.uuid(this.addonUUID).table('Todos').upsert({'Key': key, 'Completed' : true});
+        })
+        
+    }
+
+
 
     upsertTodo(body){
         

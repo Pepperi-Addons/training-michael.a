@@ -41,6 +41,9 @@ export class AddonService {
     async post(endpoint: string, body: any): Promise<any> {
         return await this.papiClient.post(endpoint, body);
     }
+    // async delete(endpoint: string, body: any): Promise<any> {
+    //     return await this.papiClient.delete(endpoint,body);
+    // }
 
     pepGet(endpoint: string): Observable<any> {
         return this.pepHttp.getPapiApiCall(endpoint);
