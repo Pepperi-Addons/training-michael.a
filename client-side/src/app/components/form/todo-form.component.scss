@@ -1,11 +1,29 @@
 .grid-container {
+
     display: grid;
     overflow-y: scroll;
-    gap: 1px 10px;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "key ." "field1 field1";
-    
-    .key { grid-area: key; }
+    gap: 1px 1px;
+    grid-template-columns: 1fr ; 
+    grid-template-areas: "name" "description" "duedate";
+    .center {
+    .name { grid-area: name; }
+}
+.center {
+    .description { grid-area: description; }
+}
+.center{
+    .dueDate { grid-area: dueDate; }
   
-    .field1 { grid-area: field1; }
   }
+.mandatory{
+    color: red;
+}
+.fieldName{
+    color: black;
+}
+
+  
+}
+
+  
+

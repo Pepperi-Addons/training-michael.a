@@ -46,6 +46,8 @@ export interface GenericListDataSource {
         title: string;
         handler: (obj: any) => Promise<void>;
     }[]>;
+    getAddHandler: () => Promise<() => Promise<boolean>>;
+
 }
 
 @Component({
@@ -63,7 +65,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
   searchString: string = '';
 
   @Input()
-  title: string = ''
+  title: string = '';
 
   @Input()
   inline: boolean = false;
@@ -81,6 +83,8 @@ export class GenericListComponent implements OnInit, AfterViewInit {
   menuActions: Array<PepMenuItem>;
   PepScreenSizeType = PepScreenSizeType;
   screenSize: PepScreenSizeType;
+  addHandler: () => Promise<boolean>;
+  
 
   constructor(
       private dataConvertorService: PepDataConvertorService,
@@ -96,6 +100,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
   }
 
+
   ngAfterViewInit(): void {
       this.reload();
   }
@@ -107,7 +112,9 @@ export class GenericListComponent implements OnInit, AfterViewInit {
   }
 
   async getMenuActions(): Promise<PepMenuItem[]> {
+    // debugger
     const actions = await this.dataSource.getActions(this.getMenuObjects());
+    this.addHandler = await this.dataSource.getAddHandler().then();
     const res: PepMenuItem[] = []
     this.menuHandlers = {};
 
@@ -122,6 +129,11 @@ export class GenericListComponent implements OnInit, AfterViewInit {
 
     return res;
   }
+  addTodo(){
+    this.addHandler();
+    
+}
+
 
   getMenuObjects() {
     let uuids = this.customList.getSelectedItemsData().rows ?? [];

@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import jwt from 'jwt-decode';
 import { PapiClient } from '@pepperi-addons/papi-sdk';
 import { Injectable } from '@angular/core';
+const uuid  = 'f72a9212-28dd-4b91-a5f1-367c7f11aac6';
 
 import {PepHttpService, PepDataConvertorService, PepSessionService} from '@pepperi-addons/ngx-lib';
 
@@ -11,7 +12,7 @@ export class AddonService {
     accessToken = '';
     parsedToken: any
     papiBaseURL = ''
-    addonUUID;
+    addonUUID: string = '';
 
     get papiClient(): PapiClient {
         return new PapiClient({
@@ -30,6 +31,7 @@ export class AddonService {
         const accessToken = this.session.getIdpToken();
         this.parsedToken = jwt(accessToken);
         this.papiBaseURL = this.parsedToken["pepperi.baseurl"]
+        this.addonUUID = uuid;
     }
 
     async get(endpoint: string): Promise<any> {
@@ -39,6 +41,9 @@ export class AddonService {
     async post(endpoint: string, body: any): Promise<any> {
         return await this.papiClient.post(endpoint, body);
     }
+    // async delete(endpoint: string, body: any): Promise<any> {
+    //     return await this.papiClient.delete(endpoint,body);
+    // }
 
     pepGet(endpoint: string): Observable<any> {
         return this.pepHttp.getPapiApiCall(endpoint);
