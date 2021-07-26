@@ -20,12 +20,12 @@ export class TodosService {
 
    async delete(keys){
      
-    
-    return await this.addonService.pepPost('delete_todos',{'arr':keys});
+    // return await this.addonService.papiClient.addons.api.uuid(this.addonService.addonUUID).file('api').func('delete_todos').post(undefined,{'arr':keys});
+    return this.addonService.pepPost(`/addons/api/${this.addonService.addonUUID}/api/delete_todos`,{'arr':keys}).toPromise();
    }
 
    async markAsDone(keys){
-     return await this.addonService.pepPost('mark_as_done', {'arr': keys});
+     return   this.addonService.pepPost(`/addons/api/${this.addonService.addonUUID}/api/mark_as_done`, {'arr': keys}).toPromise();
    }
   //  async deleteTodo(objs){ 
 

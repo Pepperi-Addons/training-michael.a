@@ -32,9 +32,9 @@
     <ng-template #listTemplate>
         <div class="list-wrapper" #listContainer id="listContainer">
             <pep-list [supportSorting]="false" [supportResizing]="true"
-                [selectionTypeForActions]="allowMultipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')" [noDataFoundMsg]="'No data' | translate" [parentScroll]="listContainer"
-                (fieldClick)="onCustomizeFieldClick($event)"
-                (selectedItemsChange)="selectedRowsChanged($event)">
+            [selectionTypeForActions]="allowMultipleSelection ? 'multi' : (allowSelection ? 'single' : 'none')" [noDataFoundMsg]="'No data' | translate" [parentScroll]="listContainer"
+            (fieldClick)="onCustomizeFieldClick($event)"
+            (selectedItemsChange)="selectedRowsChanged($event)">
             </pep-list>
         </div>
     </ng-template>

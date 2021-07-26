@@ -35,9 +35,9 @@ export class MyService {
         }
 
     async markTodo(arr: string[]) {
-        return await arr.map(async (key) => {
+        return await Promise.all(arr.map(async (key) => {
             return await this.papiClient.addons.data.uuid(this.addonUUID).table('Todos').upsert({'Key': key, 'Completed' : true});
-        })
+        }));
         
     }
 

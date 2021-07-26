@@ -112,7 +112,7 @@ export class GenericListComponent implements OnInit, AfterViewInit {
   }
 
   async getMenuActions(): Promise<PepMenuItem[]> {
-    debugger
+    // debugger
     const actions = await this.dataSource.getActions(this.getMenuObjects());
     this.addHandler = await this.dataSource.getAddHandler().then();
     const res: PepMenuItem[] = []

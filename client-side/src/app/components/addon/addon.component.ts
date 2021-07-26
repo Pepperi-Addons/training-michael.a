@@ -105,7 +105,7 @@ export class AddonComponent implements OnInit {
         },
 
         getActions: async (objs) =>  {
-            debugger
+            // debugger
             
             const res = [];
 
@@ -130,7 +130,7 @@ export class AddonComponent implements OnInit {
                 res.push({
                     title: this.translate.instant("Delete"),
                     handler: async (objs) => {
-                        debugger
+                        // debugger
                         await this.todosService.delete(objs.map((obj) => {
                             
                             return obj.Key;
@@ -155,7 +155,7 @@ export class AddonComponent implements OnInit {
                         }))
                    
                         // await this.todosService.markTodo(objs);
-                        this.GenericList.reload();
+                         this.GenericList.reload();
                         
                     }});
 
